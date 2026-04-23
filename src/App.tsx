@@ -28,9 +28,21 @@ export default function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [accessToken, setAccessToken] = useState('');
 
-  const handleLogin = () => {
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${window.location.origin}&response_type=token&scope=${encodeURIComponent(SCOPES)}`;
-    window.location.href = authUrl;
+ const handleLogin = () => {
+    // Usiamo una stringa pulita per evitare errori di interpretazione
+    const baseUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+    const options = {
+      client_id: CLIENT_ID,
+      redirect_uri: window.location.origin,
+      response_type: "token",
+      scope: "https://www.googleapis.com/auth/drive.readonly",
+      include_granted_scopes: "true",
+      state: "pass-through value"
+    };
+
+    // Costruiamo l'URL in modo che non ci siano errori di simboli
+    const queryParams = new URLSearchParams(options).toString();
+    window.location.href = `${baseUrl}?${queryParams}`;
   };
 
   useEffect(() => {
