@@ -1,0 +1,6 @@
+{
+  "name": "DrivePort",
+  "description": "A minimalist personal cloud portfolio and file manager powered by Google Drive.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
